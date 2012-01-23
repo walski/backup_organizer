@@ -57,13 +57,13 @@ Given that pattern you should drop all your backups in ``/basepath/to/your/backu
 1. Move all files in ``/basepath/to/your/backups/daily`` which
   * are not created in the current month
   
-  to ``/basepath/to/your/backups/monthly``
+    to ``/basepath/to/your/backups/monthly``
   
 2. Move all files in ``/basepath/to/your/backups/monthly`` which
   * are not created in the current year
   * are among all the files created in the same month **not** most recent file
   
-  to ``/basepath/to/your/backups/yearly``
+    to ``/basepath/to/your/backups/yearly``
   
 3. **Delete** (as this is the last rule) all files in ``/basepath/to/your/backups/monthly`` which
   * are among all the files created in the same year **not** the most recent file
