@@ -1,4 +1,4 @@
-# BackupOrganizer
+# BackupOrganizer [![Build Status](https://secure.travis-ci.org/walski/backup_organizer.png)](http://travis-ci.org/walski/backup_organizer)
 
 This gem helps you to keep your backups organized and to let the density of kept files to fade out over time.
 
