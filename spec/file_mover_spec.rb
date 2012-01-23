@@ -8,14 +8,14 @@ describe BackupOrganizer::FileMover do
       @expected_path = File.expand_path("./#{File.basename(@path)}", @destination)
     end
 
-    it "is carried out when the rule applies" do
+    it "is not carried out when the rule does not apply" do
       rule = mock(BackupOrganizer::Rule, :applies_for? => false)
       BackupOrganizer::FileMover.move_file(@path, rule, @destination)
       File.exist?(@path).should be true
       File.exist?(@expected_path).should be false
     end
 
-    it "is not carried out when the rule does not apply" do
+    it "is carried out when the rule applies" do
       rule = mock(BackupOrganizer::Rule, :applies_for? => true)
       BackupOrganizer::FileMover.move_file(@path, rule, @destination)
       File.exist?(@path).should be false
