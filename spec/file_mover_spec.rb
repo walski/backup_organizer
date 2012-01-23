@@ -3,10 +3,9 @@ require 'spec_helper'
 describe BackupOrganizer::FileMover do
   describe "moving a single file to a destination" do
     before do
-      file = Tempfile.new('background_organizer_file')
-      @path = file.path
+      @path = Tempfile.new('background_organizer_file').path
       @destination = Tempdir.new
-      @expected_path = File.expand_path("./#{File.basename(file)}", @destination)
+      @expected_path = File.expand_path("./#{File.basename(@path)}", @destination)
     end
 
     it "is carried out when the rule applies" do
