@@ -8,12 +8,18 @@ describe BackupOrganizer::Rule do
   end
 
   it "can tell if the rule apply to a certain file" do
-    subject.when {|f| f.applies}
+    subject.if {|f| f.applies}
 
     file = mock(File, :applies => false)
     subject.applies_for?(file).should be false
 
     file = mock(File, :applies => true)
     subject.applies_for?(file).should be true
+  end
+
+  it "mixes the FileExtensions in to each yielded path" do
+    subject.if{|f| (class << f; self; end).included_modules.include?(BackupOrganizer::Extensions::FileExtensions).should be true}
+    file = mock(File, :applies => true)
+    subject.applies_for?(file)
   end
 end

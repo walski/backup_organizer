@@ -1,12 +1,12 @@
 require 'tempfile'
-require 'fileutils'
+require 'backup_organizer/file_utils'
 
 class Tempdir
   def self.new
     file = Tempfile.new("backup_spec_temp_dir")
     path = file.path
     file.unlink
-    Dir.mkdir(path)
+    BackupOrganizer::FileUtils.mkdir(path)
     path
   end
 end

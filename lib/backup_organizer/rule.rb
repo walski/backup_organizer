@@ -4,11 +4,12 @@ module BackupOrganizer
       @directory = directory
     end
 
-    def when(&rule)
+    def if(&rule)
       @rule = rule
     end
 
     def applies_for?(file)
+      file.extend(Extensions::FileExtensions)
       @rule.call(file)
     end
 

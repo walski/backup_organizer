@@ -1,4 +1,4 @@
-require 'fileutils'
+require 'backup_organizer/file_utils'
 
 module BackupOrganizer
   class FileMover
@@ -9,7 +9,7 @@ module BackupOrganizer
     end
 
     def self.move_file(file, rule, destination)
-      return unless rule.applies_for?(file)
+      return if rule.applies_for?(file)
       return FileUtils.rm_rf(file) if destination == :delete
 
       FileUtils.mv(file, destination)

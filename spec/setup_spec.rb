@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'tempfile'
-require 'fileutils'
 
 describe BackupOrganizer::Setup do
   before do
@@ -41,9 +40,10 @@ describe BackupOrganizer::Setup do
     it "leaves an existing structure intact" do
       BackupOrganizer::Setup.create_structure(@configuration)
       files = %w{some test files}
+      require 'backup_organizer/file_utils'
       @configuration.directories.each do |directory|
         files.each do |file|
-          FileUtils.touch(File.expand_path("./#{file}", directory))
+          BackupOrganizer::FileUtils.touch(File.expand_path("./#{file}", directory))
         end
       end
 

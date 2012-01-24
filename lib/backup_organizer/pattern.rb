@@ -14,7 +14,6 @@ module BackupOrganizer
       rules.map &:directory
     end
 
-    protected
     def rules
       @rules ||= []
     end
