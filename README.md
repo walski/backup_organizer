@@ -43,7 +43,7 @@ BackupOrganizer.organize('/basepath/to/your/backups') do |files|
   
   files.stored_in('monthly').if do |file|
     file.created_after?(Time.now.beginning_of_year) && 
-    file.most_recent_in_creation_month?}
+    file.most_recent_in_creation_month?
   end
   
   files.stored_in('yearly').if {|file| file.most_recent_in_creation_year?}
