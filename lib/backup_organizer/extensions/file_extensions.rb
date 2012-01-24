@@ -56,7 +56,8 @@ module BackupOrganizer
         dir = File.dirname(self)
 
         files_in_dir = Dir[File.expand_path('./*', dir)]
-        files_this_month = files_in_dir.select {|f| period.cover?(FileUtils.mtime(f))}#mtime = FileUtils.mtime(f); mtime >= period.begin && mtime < next_month}
+        method = Range.instance_methods.include?(:cover?) ? :cover? : :include?
+        files_this_month = files_in_dir.select {|f| period.send(method, FileUtils.mtime(f))}
 
         self == files_this_month.sort {|a,b| File.mtime(a) <=> File.mtime(b)}.last
       end
