@@ -23,10 +23,10 @@ Or install it yourself as:
 ### Scenario
 * You are doing daily backups.
 * The goal is to have a script that you can run daily and that ensures, that
-  * all the backups of the last 30 days around are kept
-  * one file per month for the last year around is kept
-  * one file per year forever around is kept
-  * all other files get deleted
+  * all the backups of the last 30 days are kept
+  * one file per month for the last year is kept
+  * one file per year is kept forever
+  * all other files are deleted
 
 ### Solution
 
@@ -39,14 +39,14 @@ require 'active_support/core_ext'
 
 # Define the pattern
 BackupOrganizer.organize('/basepath/to/your/backups') do |files|
-  files.stored_in('daily').if {|file| file.created_after?(30.days.ago)}
-  
+  files.stored_in('daily').if {|file| file.age < 30.days}
+
   files.stored_in('monthly').if do |file|
-    file.created_after?(Time.now.beginning_of_year) && 
-    file.most_recent_in_creation_month?
+    file.age < 1.year && 
+    file.most_recent_in_its_month?
   end
-  
-  files.stored_in('yearly').if {|file| file.most_recent_in_creation_year?}
+
+  files.stored_in('yearly').if {|file| file.most_recent_in_its_year?}
 end
 ````
 
